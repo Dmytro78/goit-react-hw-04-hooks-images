@@ -1,32 +1,27 @@
-import { Component } from "react";
-import PropTypes from "prop-types";
+import { useState } from "react";
 import css from './Searchbar.module.css';
 
-class Searcbar extends Component {
-  static propTypes = {
-    onSubmit: PropTypes.func,
-  };
-  state = {
-    searchbar: "",
-  };
-  submit = (e) => {
+export default function Searcbar({ submit }) {
+  const [searchbar, setSearchbar] = useState("");
+
+  const formsubmit = (e) => {
     e.preventDefault();
-    this.props.submit(this.state.searchbar);
-    this.reset();
-  };
-  inputChange = (e) => {
-    const { name, value } = e.currentTarget;
-    this.setState({ [name]: value });
+    submit(searchbar);
+    reset();
   };
 
-  reset = () => {
-    this.setState({ searchbar: "" });
+  const inputChange = (e) => {
+    const { value } = e.currentTarget;
+    setSearchbar(value);
   };
 
-  render() {
+  const reset = () => {
+    setSearchbar("");
+  };
+
     return (
       <header className={css.Searchbar}>
-        <form onSubmit={this.submit} className={css.SearchForm}>
+        <form onSubmit={formsubmit} className={css.SearchForm}>
           <button type="submit" className={css.SearchFormButton}>
             <span className={css.SearchFormButtonLabel}>Search</span>
           </button>
@@ -34,8 +29,8 @@ class Searcbar extends Component {
             className={css.SearchFormInput}
             type="text"
             name="searchbar"
-            value={this.state.searchbar}
-            onChange={this.inputChange}
+            value={searchbar}
+            onChange={inputChange}
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
@@ -43,7 +38,4 @@ class Searcbar extends Component {
         </form>
       </header>
     );
-  }
-}
-
-export default Searcbar;
+};

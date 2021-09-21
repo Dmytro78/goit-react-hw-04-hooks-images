@@ -1,29 +1,22 @@
-import React, { Component } from "react";
+import { useState } from "react";
 
-import Searcbar from "./components/Searchbar/Searchbar";
+import Searchbar from "./components/Searchbar/Searchbar";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import "./App.css";
 
-class App extends Component {
-  state = {
-    searchbar: "",
-  };
-  onFormSubmit = (searchName) => {
+export default function App() {
+  const [searchbar, setSearchbar] = useState("");
+  
+  const onFormSubmit = (searchName) => {
     if (searchName) {
-      this.setState({ searchbar: searchName });
+      setSearchbar( searchName);
     }
-    return;
   };
 
-  render() {
-    const { searchbar } = this.state;
     return (
       <div className="App">
-        <Searcbar submit={this.onFormSubmit} />
+        <Searchbar submit={onFormSubmit} />
         <ImageGallery searchbar={searchbar} />
       </div>
     );
   }
-}
-
-export default App;
