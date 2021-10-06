@@ -1,17 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import Loader from "react-loader-spinner";
 
+import s from "./Loader.module.css";
 
-export default class Loader extends Component {
-  
-  render() {
-    return (
-      <Loader
-        type="Bars"
-        color="#00BFFF"
-        height={80}
-        width={80}
-      />
-    );
-  }
-}
+const Spinner = () => {
+  return (
+    <div className={s.Spinner}>
+      <Loader type="Bars" color="#00BFFF" height={80} width={80} />
+    </div>
+  );
+};
+
+export default Spinner;
